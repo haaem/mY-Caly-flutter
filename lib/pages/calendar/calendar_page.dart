@@ -83,7 +83,6 @@ class _CalendarPageState extends State<CalendarPage> {
                             children: [
                               BodyText(
                                 text: '${day.day}',
-                                size: 20,
                                 color: primaryBlue,
                                 weight: isSameDay(day, _selectedDay)
                                     ? FontWeight.bold
@@ -125,13 +124,10 @@ class _CalendarPageState extends State<CalendarPage> {
                               shape: BoxShape.circle,
                             ),
                             padding: const EdgeInsets.all(10),
-                            child: Text(
-                              '${day.day}',
-                              style: const TextStyle(
-                                fontWeight: FontWeight.bold,
-                                color: Colors.white,
-                                fontSize: 20,
-                              ),
+                            child: BodyText(
+                              text: '${day.day}',
+                              weight: FontWeight.bold,
+                              color: Colors.white,
                             ),
                           ),
                           if (eventCount > 0)
@@ -163,18 +159,14 @@ class _CalendarPageState extends State<CalendarPage> {
                         children: [
                           Container(
                             decoration: BoxDecoration(
-                              color: Colors.transparent,
-                              shape: BoxShape.circle,
-                              border: Border.all(color: primaryBlue, width: 1)
+                                color: Colors.transparent,
+                                shape: BoxShape.circle,
+                                border: Border.all(color: primaryBlue, width: 1)
                             ),
                             padding: const EdgeInsets.all(9),
-                            child: Text(
-                              '${day.day}',
-                              style: const TextStyle(
-                                fontWeight: FontWeight.bold,
-                                color: primaryBlue,
-                                fontSize: 20,
-                              ),
+                            child: BodyText(
+                              text: '${day.day}',
+                              color: primaryBlue,
                             ),
                           ),
                           if (eventCount > 0)
