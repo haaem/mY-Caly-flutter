@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:my_caly_flutter/pages/calendar/calendar_page.dart';
-import 'package:my_caly_flutter/pages/login/login_page.dart';
 import 'package:my_caly_flutter/config/routes.dart';
 
 void main() {
