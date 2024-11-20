@@ -17,6 +17,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primarySwatch: Colors.indigo,
+        canvasColor: Color(0xffC5C6CC)
       ),
       initialRoute: '/login',
       getPages: routes,
