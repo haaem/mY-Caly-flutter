@@ -24,7 +24,7 @@ class LoginPage extends StatelessWidget {
       );
       return;
     }
-    Get.toNamed('/calendar');
+    Get.toNamed('/check_major');
   }
 
   @override
@@ -34,6 +34,7 @@ class LoginPage extends StatelessWidget {
     var height = media.height;
 
     return Scaffold(
+      backgroundColor: backgroundColor,
       body: SingleChildScrollView(
         child: Padding(
           padding: EdgeInsets.fromLTRB(20, height*0.25, 20, 20),
