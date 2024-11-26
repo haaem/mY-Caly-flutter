@@ -171,156 +171,15 @@ class _CalendarPageState extends State<CalendarPage> {
                                 calendarBuilders: CalendarBuilders(
                                   defaultBuilder: (context, day, focusedDay) {
                                     final dayEvents = _getEventsForDay(day);
-
-                                    return Container(
-                                      padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 2),
-                                      child: Column(
-                                        mainAxisAlignment: MainAxisAlignment.start,
-                                        crossAxisAlignment: CrossAxisAlignment.center,
-                                        children: [
-                                          Text(
-                                            '${day.day}',
-                                            style: const TextStyle(
-                                              fontSize: 14,
-                                              fontWeight: FontWeight.w300,
-                                            ),
-                                          ),
-                                          const SizedBox(height: 3,),
-                                          // 이벤트 목록
-                                          if (dayEvents.isNotEmpty)
-                                            Flexible(
-                                              child: ListView.builder(
-                                                physics: const NeverScrollableScrollPhysics(),
-                                                // 이벤트 칸 크기를 내용에 맞춤
-                                                shrinkWrap: true,
-                                                itemCount: dayEvents.length,
-                                                itemBuilder: (context, index) {
-                                                  final event = dayEvents[index];
-                                                  return Container(
-                                                    margin: const EdgeInsets.symmetric(vertical: 1),
-                                                    padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 2),
-                                                    decoration: BoxDecoration(
-                                                      color: _getCategoryColor(event.category),
-                                                      borderRadius: BorderRadius.circular(3),
-                                                    ),
-                                                    child: Text(
-                                                      event.title,
-                                                      maxLines: 1,
-                                                      overflow: TextOverflow.ellipsis,
-                                                      style: const TextStyle(
-                                                        color: Colors.white,
-                                                        fontSize: 10,
-                                                      ),
-                                                    ),
-                                                  );
-                                                },
-                                              ),
-                                            ),
-                                        ],
-                                      ),
-                                    );
+                                    return _buildEvent(day, dayEvents, false, primaryTransparent);
                                   },
                                   selectedBuilder: (context, day, focusedDay) {
                                     final dayEvents = _getEventsForDay(day);
-                                    return Column(
-                                      children: [
-                                        Container(
-                                          alignment: Alignment.center,
-                                          width: 25,
-                                          height: 25,
-                                          decoration: const BoxDecoration(
-                                            color: primaryBlack,
-                                            shape: BoxShape.circle,
-                                          ),
-                                          padding: const EdgeInsets.all(6),
-                                          child: Text(
-                                            '${day.day}',
-                                            style: const TextStyle(fontSize: 11, fontWeight: FontWeight.w400, color: Colors.white),
-                                          ),
-                                        ),
-                                        const SizedBox(height: 3,),
-                                        if (dayEvents.isNotEmpty)
-                                          Flexible(
-                                            child: ListView.builder(
-                                              physics: const NeverScrollableScrollPhysics(),
-                                              // 이벤트 칸 크기를 내용에 맞춤
-                                              shrinkWrap: true,
-                                              itemCount: dayEvents.length,
-                                              itemBuilder: (context, index) {
-                                                final event = dayEvents[index];
-                                                return Container(
-                                                  margin: const EdgeInsets.symmetric(vertical: 1),
-                                                  padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 2),
-                                                  decoration: BoxDecoration(
-                                                    color: _getCategoryColor(event.category),
-                                                    borderRadius: BorderRadius.circular(3),
-                                                  ),
-                                                  child: Text(
-                                                    event.title,
-                                                    maxLines: 1,
-                                                    overflow: TextOverflow.ellipsis,
-                                                    style: const TextStyle(
-                                                      color: Colors.white,
-                                                      fontSize: 10,
-                                                    ),
-                                                  ),
-                                                );
-                                              },
-                                            ),
-                                          ),
-                                      ],
-                                    );
+                                    return _buildEvent(day, dayEvents, true, primaryBlack);
                                   },
                                   todayBuilder: (context, day, focusedDay) {
                                     final dayEvents = _getEventsForDay(day);
-                                    return Column(
-                                      children: [
-                                        Container(
-                                          alignment: Alignment.center,
-                                          width: 25,
-                                          height: 25,
-                                          decoration: const BoxDecoration(
-                                            color: Colors.black26,
-                                            shape: BoxShape.circle,
-                                          ),
-                                          padding: const EdgeInsets.all(6),
-                                          child: Text(
-                                            '${day.day}',
-                                            style: const TextStyle(fontSize: 11, fontWeight: FontWeight.w400, color: Colors.white),
-                                          ),
-                                        ),
-                                        const SizedBox(height: 3,),
-                                        if (dayEvents.isNotEmpty)
-                                          Flexible(
-                                            child: ListView.builder(
-                                              physics: const NeverScrollableScrollPhysics(),
-                                              // 이벤트 칸 크기를 내용에 맞춤
-                                              shrinkWrap: true,
-                                              itemCount: dayEvents.length,
-                                              itemBuilder: (context, index) {
-                                                final event = dayEvents[index];
-                                                return Container(
-                                                  margin: const EdgeInsets.symmetric(vertical: 1),
-                                                  padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 2),
-                                                  decoration: BoxDecoration(
-                                                    color: _getCategoryColor(event.category),
-                                                    borderRadius: BorderRadius.circular(3),
-                                                  ),
-                                                  child: Text(
-                                                    event.title,
-                                                    maxLines: 1,
-                                                    overflow: TextOverflow.ellipsis,
-                                                    style: const TextStyle(
-                                                      color: Colors.white,
-                                                      fontSize: 10,
-                                                    ),
-                                                  ),
-                                                );
-                                              },
-                                            ),
-                                          ),
-                                      ],
-                                    );
+                                    return _buildEvent(day, dayEvents, true, Colors.black26);
                                   },
                                 ),
                               ),
@@ -353,6 +212,66 @@ class _CalendarPageState extends State<CalendarPage> {
             ),
           ),
         ),
+      ),
+    );
+  }
+
+  Widget _buildEvent(DateTime day, List<Event> dayEvents, bool hasCircle, Color circleColor) {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 1, vertical: 3),
+      child: Column(
+        children: [
+          hasCircle ? Container(
+            alignment: Alignment.center,
+            width: 25,
+            height: 25,
+            decoration: BoxDecoration(
+              color: circleColor,
+              shape: BoxShape.circle,
+            ),
+            padding: const EdgeInsets.all(6),
+            child: Text(
+              '${day.day}',
+              style: const TextStyle(fontSize: 11, fontWeight: FontWeight.w400, color: Colors.white),
+            ),
+          ) : Text(
+            '${day.day}',
+            style: const TextStyle(
+              fontSize: 14,
+              fontWeight: FontWeight.w300,
+            ),
+          ),
+          hasCircle ? const SizedBox(height: 1,) : const SizedBox(height: 6,),
+          if (dayEvents.isNotEmpty)
+            Flexible(
+              child: ListView.builder(
+                physics: const NeverScrollableScrollPhysics(),
+                // 이벤트 칸 크기를 내용에 맞춤
+                shrinkWrap: true,
+                itemCount: dayEvents.length,
+                itemBuilder: (context, index) {
+                  final event = dayEvents[index];
+                  return Container(
+                    margin: const EdgeInsets.symmetric(vertical: 1),
+                    padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 0.5),
+                    decoration: BoxDecoration(
+                      color: _getCategoryColor(event.category),
+                      borderRadius: BorderRadius.circular(3),
+                    ),
+                    child: Text(
+                      event.title,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: const TextStyle(
+                        color: Colors.white,
+                        fontSize: 10,
+                      ),
+                    ),
+                  );
+                },
+              ),
+            ),
+        ],
       ),
     );
   }
