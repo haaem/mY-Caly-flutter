@@ -67,6 +67,19 @@ class _CalendarPageState extends State<CalendarPage> {
     return months[month - 1];
   }
 
+  Color _getCategoryColor(String category) {
+    switch (category) {
+      case 'orange':
+        return Colors.orange;
+      case 'pink':
+        return Colors.pink;
+      case 'blue':
+        return Colors.blue;
+      default:
+        return Colors.grey;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -74,7 +87,7 @@ class _CalendarPageState extends State<CalendarPage> {
         backgroundColor: backgroundColor,
         body: SingleChildScrollView(
           child: Padding(
-            padding: const EdgeInsets.fromLTRB(20, 20, 20, 15),
+            padding: const EdgeInsets.fromLTRB(20, 40, 20, 15),
             child: Column(
               children: [
                 ClipRRect(
@@ -83,197 +96,238 @@ class _CalendarPageState extends State<CalendarPage> {
                     color: Colors.white,
                     child: Column(
                       children: [
-                        SizedBox(height: 20,),
+                        const SizedBox(height: 20,),
                         // header
                         Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 8),
+                          child: Column(
                             children: [
                               Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceAround,
                                 children: [
-                                  Text(
-                                    _monthName(_focusedDay.month),
-                                    style: const TextStyle(
-                                      fontSize: 28,
-                                      fontWeight: FontWeight.w500,
-                                    ),
+                                  Row(
+                                    children: [
+                                      Text(
+                                        _monthName(_focusedDay.month),
+                                        style: const TextStyle(
+                                          fontSize: 28,
+                                          fontWeight: FontWeight.w500,
+                                        ),
+                                      ),
+                                      const SizedBox(width: 10),
+                                      Text(
+                                        '${_focusedDay.year}',
+                                        style: const TextStyle(
+                                          fontSize: 28,
+                                          fontWeight: FontWeight.w200,
+                                        ),
+                                      ),
+                                    ],
                                   ),
-                                  const SizedBox(width: 10),
-                                  Text(
-                                    '${_focusedDay.year}',
-                                    style: const TextStyle(
-                                      fontSize: 28,
-                                      fontWeight: FontWeight.w200,
-                                    ),
+                                  Row(
+                                    children: [
+                                      IconButton(
+                                        icon: const Icon(Icons.chevron_left),
+                                        onPressed: _moveToPreviousMonth,
+                                      ),
+                                      IconButton(
+                                        icon: const Icon(Icons.chevron_right),
+                                        onPressed: _moveToNextMonth,
+                                      ),
+                                    ],
                                   ),
                                 ],
                               ),
-                              Row(
-                                children: [
-                                  IconButton(
-                                    icon: const Icon(Icons.chevron_left),
-                                    onPressed: _moveToPreviousMonth,
+                              const SizedBox(height: 10,),
+                              TableCalendar(
+                                focusedDay: _focusedDay,
+                                firstDay: DateTime(_focusedDay.year, 1, 1),
+                                lastDay: DateTime(_focusedDay.year, 12, 31),
+                                selectedDayPredicate: (day) {
+                                  return isSameDay(day, _selectedDay);
+                                },
+                                onDaySelected: (selectedDay, focusedDay) {
+                                  setState(() {
+                                    _selectedDay = selectedDay;
+                                    _focusedDay = focusedDay;
+                                  });
+                                },
+                                onPageChanged: (focusedDay) {
+                                  _focusedDay = focusedDay;
+                                },
+                                headerVisible: false,
+                                daysOfWeekHeight: 50,
+                                calendarStyle: const CalendarStyle(
+                                  defaultTextStyle: TextStyle(color: primaryBlue),
+                                  weekendTextStyle: TextStyle(color: primaryBlack),
+                                  outsideDaysVisible: false,
+                                  // 기본 날짜 스타일
+                                  defaultDecoration: BoxDecoration(
+                                    shape: BoxShape.circle,
                                   ),
-                                  IconButton(
-                                    icon: const Icon(Icons.chevron_right),
-                                    onPressed: _moveToNextMonth,
-                                  ),
-                                ],
+                                ),
+                                rowHeight: 80,
+                                availableGestures: AvailableGestures.horizontalSwipe,
+                                calendarBuilders: CalendarBuilders(
+                                  defaultBuilder: (context, day, focusedDay) {
+                                    final dayEvents = _getEventsForDay(day);
+
+                                    return Container(
+                                      padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 2),
+                                      child: Column(
+                                        mainAxisAlignment: MainAxisAlignment.start,
+                                        crossAxisAlignment: CrossAxisAlignment.center,
+                                        children: [
+                                          Text(
+                                            '${day.day}',
+                                            style: const TextStyle(
+                                              fontSize: 14,
+                                              fontWeight: FontWeight.w300,
+                                            ),
+                                          ),
+                                          const SizedBox(height: 3,),
+                                          // 이벤트 목록
+                                          if (dayEvents.isNotEmpty)
+                                            Flexible(
+                                              child: ListView.builder(
+                                                physics: const NeverScrollableScrollPhysics(),
+                                                // 이벤트 칸 크기를 내용에 맞춤
+                                                shrinkWrap: true,
+                                                itemCount: dayEvents.length,
+                                                itemBuilder: (context, index) {
+                                                  final event = dayEvents[index];
+                                                  return Container(
+                                                    margin: const EdgeInsets.symmetric(vertical: 1),
+                                                    padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 2),
+                                                    decoration: BoxDecoration(
+                                                      color: _getCategoryColor(event.category),
+                                                      borderRadius: BorderRadius.circular(3),
+                                                    ),
+                                                    child: Text(
+                                                      event.title,
+                                                      maxLines: 1,
+                                                      overflow: TextOverflow.ellipsis,
+                                                      style: const TextStyle(
+                                                        color: Colors.white,
+                                                        fontSize: 10,
+                                                      ),
+                                                    ),
+                                                  );
+                                                },
+                                              ),
+                                            ),
+                                        ],
+                                      ),
+                                    );
+                                  },
+                                  selectedBuilder: (context, day, focusedDay) {
+                                    final dayEvents = _getEventsForDay(day);
+                                    return Column(
+                                      children: [
+                                        Container(
+                                          alignment: Alignment.center,
+                                          width: 25,
+                                          height: 25,
+                                          decoration: const BoxDecoration(
+                                            color: primaryBlack,
+                                            shape: BoxShape.circle,
+                                          ),
+                                          padding: const EdgeInsets.all(6),
+                                          child: Text(
+                                            '${day.day}',
+                                            style: const TextStyle(fontSize: 11, fontWeight: FontWeight.w400, color: Colors.white),
+                                          ),
+                                        ),
+                                        const SizedBox(height: 3,),
+                                        if (dayEvents.isNotEmpty)
+                                          Flexible(
+                                            child: ListView.builder(
+                                              physics: const NeverScrollableScrollPhysics(),
+                                              // 이벤트 칸 크기를 내용에 맞춤
+                                              shrinkWrap: true,
+                                              itemCount: dayEvents.length,
+                                              itemBuilder: (context, index) {
+                                                final event = dayEvents[index];
+                                                return Container(
+                                                  margin: const EdgeInsets.symmetric(vertical: 1),
+                                                  padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 2),
+                                                  decoration: BoxDecoration(
+                                                    color: _getCategoryColor(event.category),
+                                                    borderRadius: BorderRadius.circular(3),
+                                                  ),
+                                                  child: Text(
+                                                    event.title,
+                                                    maxLines: 1,
+                                                    overflow: TextOverflow.ellipsis,
+                                                    style: const TextStyle(
+                                                      color: Colors.white,
+                                                      fontSize: 10,
+                                                    ),
+                                                  ),
+                                                );
+                                              },
+                                            ),
+                                          ),
+                                      ],
+                                    );
+                                  },
+                                  todayBuilder: (context, day, focusedDay) {
+                                    final dayEvents = _getEventsForDay(day);
+                                    return Column(
+                                      children: [
+                                        Container(
+                                          alignment: Alignment.center,
+                                          width: 25,
+                                          height: 25,
+                                          decoration: const BoxDecoration(
+                                            color: Colors.black26,
+                                            shape: BoxShape.circle,
+                                          ),
+                                          padding: const EdgeInsets.all(6),
+                                          child: Text(
+                                            '${day.day}',
+                                            style: const TextStyle(fontSize: 11, fontWeight: FontWeight.w400, color: Colors.white),
+                                          ),
+                                        ),
+                                        const SizedBox(height: 3,),
+                                        if (dayEvents.isNotEmpty)
+                                          Flexible(
+                                            child: ListView.builder(
+                                              physics: const NeverScrollableScrollPhysics(),
+                                              // 이벤트 칸 크기를 내용에 맞춤
+                                              shrinkWrap: true,
+                                              itemCount: dayEvents.length,
+                                              itemBuilder: (context, index) {
+                                                final event = dayEvents[index];
+                                                return Container(
+                                                  margin: const EdgeInsets.symmetric(vertical: 1),
+                                                  padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 2),
+                                                  decoration: BoxDecoration(
+                                                    color: _getCategoryColor(event.category),
+                                                    borderRadius: BorderRadius.circular(3),
+                                                  ),
+                                                  child: Text(
+                                                    event.title,
+                                                    maxLines: 1,
+                                                    overflow: TextOverflow.ellipsis,
+                                                    style: const TextStyle(
+                                                      color: Colors.white,
+                                                      fontSize: 10,
+                                                    ),
+                                                  ),
+                                                );
+                                              },
+                                            ),
+                                          ),
+                                      ],
+                                    );
+                                  },
+                                ),
                               ),
                             ],
                           ),
                         ),
-                        TableCalendar(
-                          focusedDay: _focusedDay,
-                          firstDay: DateTime(_focusedDay.year, 1, 1),
-                          lastDay: DateTime(_focusedDay.year, 12, 31),
-                          selectedDayPredicate: (day) {
-                            return isSameDay(day, _selectedDay);
-                          },
-                          onDaySelected: (selectedDay, focusedDay) {
-                            setState(() {
-                              _selectedDay = selectedDay;
-                              _focusedDay = focusedDay;
-                            });
-                          },
-                          onPageChanged: (focusedDay) {
-                            _focusedDay = focusedDay;
-                          },
-                          headerVisible: false,
-                          daysOfWeekHeight: 30,
-                          calendarStyle: const CalendarStyle(
-                            defaultTextStyle: TextStyle(color: primaryBlue),
-                            weekendTextStyle: TextStyle(color: primaryBlack),
-                            outsideDaysVisible: false,
-                            // 기본 날짜 스타일
-                            defaultDecoration: BoxDecoration(
-                              shape: BoxShape.circle,
-                            ),
-                          ),
-                          availableGestures: AvailableGestures.horizontalSwipe,
-                          calendarBuilders: CalendarBuilders(
-                            defaultBuilder: (context, day, focusedDay) {
-                              final eventCount = _getEventsForDay(day).length;
-                  
-                              return Stack(
-                                alignment: Alignment.center,
-                                children: [
-                                  Column(
-                                    mainAxisSize: MainAxisSize.min,
-                                    children: [
-                                      BodyText(
-                                        text: '${day.day}',
-                                        color: primaryBlue,
-                                        weight: isSameDay(day, _selectedDay)
-                                            ? FontWeight.bold
-                                            : FontWeight.normal,
-                                      ),
-                                      const SizedBox(height: 10),
-                                    ],
-                                  ),
-                                  if (eventCount > 0)
-                                    Positioned(
-                                      bottom: -5,
-                                      child: Container(
-                                        padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 2),
-                                        decoration: BoxDecoration(
-                                          color: Colors.grey[300],
-                                          borderRadius: BorderRadius.circular(10),
-                                        ),
-                                        child: Text(
-                                          '$eventCount',
-                                          style: const TextStyle(
-                                            fontSize: 10,
-                                            color: Colors.black,
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                ],
-                              );
-                            },
-                            selectedBuilder: (context, day, focusedDay) {
-                              final eventCount = _getEventsForDay(day).length;
-                  
-                              return Stack(
-                                alignment: Alignment.center,
-                                children: [
-                                  Container(
-                                    decoration: BoxDecoration(
-                                      color: primaryBlue,
-                                      shape: BoxShape.circle,
-                                    ),
-                                    padding: const EdgeInsets.all(10),
-                                    child: BodyText(
-                                      text: '${day.day}',
-                                      weight: FontWeight.bold,
-                                      color: Colors.white,
-                                    ),
-                                  ),
-                                  if (eventCount > 0)
-                                    Positioned(
-                                      bottom: -5,
-                                      child: Container(
-                                        padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 2),
-                                        decoration: BoxDecoration(
-                                          color: Colors.grey[300],
-                                          borderRadius: BorderRadius.circular(10),
-                                        ),
-                                        child: Text(
-                                          '$eventCount',
-                                          style: const TextStyle(
-                                            fontSize: 10,
-                                            color: Colors.black,
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                ],
-                              );
-                            },
-                            todayBuilder: (context, day, focusedDay) {
-                              final eventCount = _getEventsForDay(day).length;
-                  
-                              return Stack(
-                                alignment: Alignment.center,
-                                children: [
-                                  Container(
-                                    decoration: BoxDecoration(
-                                        color: Colors.transparent,
-                                        shape: BoxShape.circle,
-                                        border: Border.all(color: primaryBlue, width: 1)
-                                    ),
-                                    padding: const EdgeInsets.all(9),
-                                    child: BodyText(
-                                      text: '${day.day}',
-                                      color: primaryBlue,
-                                    ),
-                                  ),
-                                  if (eventCount > 0)
-                                    Positioned(
-                                      bottom: -5,
-                                      child: Container(
-                                        padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 2),
-                                        decoration: BoxDecoration(
-                                          color: Colors.grey[300],
-                                          borderRadius: BorderRadius.circular(9),
-                                        ),
-                                        child: Text(
-                                          '$eventCount',
-                                          style: const TextStyle(
-                                            fontSize: 10,
-                                            color: Colors.black,
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                ],
-                              );
-                            },
-                          ),
-                        ),
-                        SizedBox(height: 30,)
+                        const SizedBox(height: 24,)
                       ],
                     ),
                   ),
