@@ -14,6 +14,7 @@ class CalendarPage extends StatefulWidget {
 class _CalendarPageState extends State<CalendarPage> {
   DateTime? _selectedDay;
   DateTime _focusedDay = DateTime.now();
+  DateTime? today;
 
   List<Event> _getEventsForDay(DateTime day) {
     return events[DateTime(day.year, day.month, day.day)] ?? [];
@@ -23,6 +24,7 @@ class _CalendarPageState extends State<CalendarPage> {
   void initState() {
     super.initState();
     _selectedDay = _focusedDay;
+    today = DateTime.now();
   }
 
   @override
@@ -102,41 +104,49 @@ class _CalendarPageState extends State<CalendarPage> {
                           padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 8),
                           child: Column(
                             children: [
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                                children: [
-                                  Row(
-                                    children: [
-                                      Text(
-                                        _monthName(_focusedDay.month),
-                                        style: const TextStyle(
-                                          fontSize: 28,
-                                          fontWeight: FontWeight.w500,
+                              GestureDetector(
+                                onTap: () {
+                                  setState(() {
+                                    _focusedDay = today!;
+                                    _selectedDay = _focusedDay;
+                                  });
+                                },
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                  children: [
+                                    Row(
+                                      children: [
+                                        Text(
+                                          _monthName(_focusedDay.month),
+                                          style: const TextStyle(
+                                            fontSize: 28,
+                                            fontWeight: FontWeight.w500,
+                                          ),
                                         ),
-                                      ),
-                                      const SizedBox(width: 10),
-                                      Text(
-                                        '${_focusedDay.year}',
-                                        style: const TextStyle(
-                                          fontSize: 28,
-                                          fontWeight: FontWeight.w200,
+                                        const SizedBox(width: 10),
+                                        Text(
+                                          '${_focusedDay.year}',
+                                          style: const TextStyle(
+                                            fontSize: 28,
+                                            fontWeight: FontWeight.w200,
+                                          ),
                                         ),
-                                      ),
-                                    ],
-                                  ),
-                                  Row(
-                                    children: [
-                                      IconButton(
-                                        icon: const Icon(Icons.chevron_left),
-                                        onPressed: _moveToPreviousMonth,
-                                      ),
-                                      IconButton(
-                                        icon: const Icon(Icons.chevron_right),
-                                        onPressed: _moveToNextMonth,
-                                      ),
-                                    ],
-                                  ),
-                                ],
+                                      ],
+                                    ),
+                                    Row(
+                                      children: [
+                                        IconButton(
+                                          icon: const Icon(Icons.chevron_left),
+                                          onPressed: _moveToPreviousMonth,
+                                        ),
+                                        IconButton(
+                                          icon: const Icon(Icons.chevron_right),
+                                          onPressed: _moveToNextMonth,
+                                        ),
+                                      ],
+                                    ),
+                                  ],
+                                ),
                               ),
                               const SizedBox(height: 10,),
                               TableCalendar(
