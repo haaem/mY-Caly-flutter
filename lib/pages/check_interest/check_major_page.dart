@@ -21,11 +21,11 @@ class _CheckMajorPageState extends State<CheckMajorPage> {
   String? selectedMajor;
   String? selectedGrade;
 
-  void _saveMajorAndGrade(String major, String grade) {
+  void _saveMajor(String major) {
     SharedPreferences.getInstance().then((prefs) {
       prefs.setString('selectedMajor', major);
-      prefs.setString('selectedGrade', grade);
-      print("Saved Major: $major, Grade: $grade");
+      // prefs.setString('selectedGrade', grade);
+      print("Saved Major: $major");
     });
   }
 
@@ -36,7 +36,6 @@ class _CheckMajorPageState extends State<CheckMajorPage> {
     var height = media.height;
 
     return Scaffold(
-      backgroundColor: backgroundColor,
       body: SafeArea(
           child: SingleChildScrollView(
             child: Padding(
@@ -84,26 +83,26 @@ class _CheckMajorPageState extends State<CheckMajorPage> {
                       });
                     },
                   ),
-                  const SizedBox(height: 30,),
+                  // const SizedBox(height: 30,),
                   // 학년 선택
-                  const BodyText(text: 'Select your Grade:', color: primaryBlack),
-                  const SizedBox(height: 10),
-                  DropdownButton<String>(
-                    value: selectedGrade,
-                    hint: const Text('Select Grade'),
-                    isExpanded: true,
-                    items: grades.map((String grade) {
-                      return DropdownMenuItem<String>(
-                        value: grade,
-                        child: Text(grade),
-                      );
-                    }).toList(),
-                    onChanged: (String? value) {
-                      setState(() {
-                        selectedGrade = value;
-                      });
-                    },
-                  ),
+                  // const BodyText(text: 'Select your Grade:', color: primaryBlack),
+                  // const SizedBox(height: 10),
+                  // DropdownButton<String>(
+                  //   value: selectedGrade,
+                  //   hint: const Text('Select Grade'),
+                  //   isExpanded: true,
+                  //   items: grades.map((String grade) {
+                  //     return DropdownMenuItem<String>(
+                  //       value: grade,
+                  //       child: Text(grade),
+                  //     );
+                  //   }).toList(),
+                  //   onChanged: (String? value) {
+                  //     setState(() {
+                  //       selectedGrade = value;
+                  //     });
+                  //   },
+                  // ),
                   const SizedBox(height: 30,),
                   GestureDetector(
                     child: Container(
@@ -111,11 +110,12 @@ class _CheckMajorPageState extends State<CheckMajorPage> {
                       alignment: Alignment.center,
                       height: 50,
                       width: width-40,
-                      decoration: BoxDecoration(border: Border.all(), color: primaryBlue, borderRadius: BorderRadius.circular(10)),
+                      decoration: BoxDecoration(border: Border.all(), color: primaryBlack, borderRadius: BorderRadius.circular(10)),
                     ),
                     onTap: () {
-                      if (selectedMajor != null && selectedGrade != null) {
-                        _saveMajorAndGrade(selectedMajor!, selectedGrade!);
+                      // if (selectedMajor != null && selectedGrade != null) {
+                      if (selectedMajor != null) {
+                        _saveMajor(selectedMajor!);
                         Get.toNamed('/check_interest');
                       } else {
                         // 전공이나 학년이 선택되지 않은 경우
