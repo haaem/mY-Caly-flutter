@@ -70,7 +70,6 @@ class _CheckInterestPageState extends State<CheckInterestPage> {
     var width = media.width;
 
     return Scaffold(
-      backgroundColor: backgroundColor,
         body: SafeArea(
             child: Padding(
                 padding: EdgeInsets.fromLTRB(30, 40, 30, 20),
@@ -78,22 +77,30 @@ class _CheckInterestPageState extends State<CheckInterestPage> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       ClipRRect(
-                        borderRadius: BorderRadius.circular(5),
-                        child: Row(
-                          children: [
-                            Container(
-                              height: 7,
-                              width: (width - 60) / 2,
-                              decoration: BoxDecoration(color: primaryGrey),
-                            ),
-                            Container(
-                              height: 7,
-                              width: (width - 60) / 2,
-                              decoration: BoxDecoration(color: primaryBlue),
-                            ),
-                          ],
+                        child: Container(
+                          width: (width-60),
+                          height: 7,
+                          color: primaryBlack,
                         ),
+                        borderRadius: BorderRadius.circular(5),
                       ),
+                      // ClipRRect(
+                      //   borderRadius: BorderRadius.circular(5),
+                      //   child: Row(
+                      //     children: [
+                      //       Container(
+                      //         height: 7,
+                      //         width: (width - 60) / 2,
+                      //         decoration: BoxDecoration(color: primaryGrey),
+                      //       ),
+                      //       Container(
+                      //         height: 7,
+                      //         width: (width - 60) / 2,
+                      //         decoration: BoxDecoration(color: primaryBlue),
+                      //       ),
+                      //     ],
+                      //   ),
+                      // ),
                       const SizedBox(height: 40),
                       const TitleText(
                         text: 'Personalize your Interests',
@@ -157,10 +164,10 @@ class _CheckInterestPageState extends State<CheckInterestPage> {
                           width: width - 40,
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(10),
-                            color: primaryBlue,
+                            color: primaryBlack,
                           ),
                           child: const BodyText(
-                            text: 'Next',
+                            text: 'Done',
                             color: Colors.white,
                           ),
                         ),

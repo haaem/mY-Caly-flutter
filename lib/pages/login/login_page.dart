@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:my_caly_flutter/config/color.dart';
 import 'package:my_caly_flutter/config/text/body_text.dart';
 import 'package:my_caly_flutter/config/text/title_text.dart';
+import 'package:dio/dio.dart';
 
 class LoginPage extends StatelessWidget {
   LoginPage({super.key});
@@ -10,6 +11,8 @@ class LoginPage extends StatelessWidget {
   // controller
   final TextEditingController _idController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
+
+  final dio = Dio();
 
   // 로그인 버튼 눌렀을 때
   void _login() {
@@ -24,6 +27,7 @@ class LoginPage extends StatelessWidget {
       );
       return;
     }
+
     Get.toNamed('/check_major');
   }
 
@@ -34,7 +38,6 @@ class LoginPage extends StatelessWidget {
     var height = media.height;
 
     return Scaffold(
-      backgroundColor: backgroundColor,
       body: SingleChildScrollView(
         child: Padding(
           padding: EdgeInsets.fromLTRB(20, height*0.25, 20, 20),
