@@ -195,7 +195,7 @@ class _CalendarPageState extends State<CalendarPage> {
                             return const Center(
                               child: Text(
                                 'Sat',
-                                style: TextStyle(color: Colors.blue),
+                                style: TextStyle(color: Color(0xff0066FF)),
                               ),
                             );
                           } else if (day.weekday == DateTime.sunday) {
@@ -260,7 +260,7 @@ class _CalendarPageState extends State<CalendarPage> {
                         final event = _getEventsForDay(_selectedDay!)[index];
                         return GestureDetector(
                           onTap: () {
-                            Get.toNamed('/detail', arguments: {"id": event.id});
+                            Get.toNamed('/detail', arguments: {"event": event, "color": _getCategoryColor(event.category)});
                           },
                           child: Row(
                             children: [

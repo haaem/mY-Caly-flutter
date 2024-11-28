@@ -32,8 +32,6 @@ class Event {
       tags = List<String>.from(json['tags'][0]);
     }
 
-    //print(List<String>.from(json['images']).runtimeType);
-
     return Event(
       id: json['id'],
       title: json['title'] ?? '',
