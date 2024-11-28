@@ -1,66 +1,26 @@
 [
     {
-        "merged": "/Users/haaem/.gradle/daemon/8.3/com.example.my_caly_flutter.app-merged_res-28:/mipmap-xxhdpi_launcher.png.flat",
-        "source": "/Users/haaem/.gradle/daemon/8.3/com.example.my_caly_flutter.app-main-23:/mipmap-xxhdpi/launcher.png"
+        "merged": "com.example.my_caly_flutter.app-merged_res-29:/mipmap-xxhdpi_ic_launcher.png.flat",
+        "source": "com.example.my_caly_flutter.app-main-24:/mipmap-xxhdpi/ic_launcher.png"
     },
     {
-        "merged": "/Users/haaem/.gradle/daemon/8.3/com.example.my_caly_flutter.app-merged_res-28:/drawable-v21_launch_background.xml.flat",
-        "source": "/Users/haaem/.gradle/daemon/8.3/com.example.my_caly_flutter.app-main-23:/drawable-v21/launch_background.xml"
+        "merged": "com.example.my_caly_flutter.app-merged_res-29:/mipmap-xxxhdpi_ic_launcher.png.flat",
+        "source": "com.example.my_caly_flutter.app-main-24:/mipmap-xxxhdpi/ic_launcher.png"
     },
     {
-        "merged": "/Users/haaem/.gradle/daemon/8.3/com.example.my_caly_flutter.app-merged_res-28:/mipmap-mdpi_launcher.png.flat",
-        "source": "/Users/haaem/.gradle/daemon/8.3/com.example.my_caly_flutter.app-main-23:/mipmap-mdpi/launcher.png"
+        "merged": "com.example.my_caly_flutter.app-merged_res-29:/mipmap-xhdpi_ic_launcher.png.flat",
+        "source": "com.example.my_caly_flutter.app-main-24:/mipmap-xhdpi/ic_launcher.png"
     },
     {
-        "merged": "/Users/haaem/.gradle/daemon/8.3/com.example.my_caly_flutter.app-merged_res-28:/mipmap-xhdpi_launcher.png.flat",
-        "source": "/Users/haaem/.gradle/daemon/8.3/com.example.my_caly_flutter.app-main-23:/mipmap-xhdpi/launcher.png"
+        "merged": "com.example.my_caly_flutter.app-merged_res-29:/mipmap-hdpi_ic_launcher.png.flat",
+        "source": "com.example.my_caly_flutter.app-main-24:/mipmap-hdpi/ic_launcher.png"
     },
     {
-        "merged": "/Users/haaem/.gradle/daemon/8.3/com.example.my_caly_flutter.app-merged_res-28:/mipmap-xxxhdpi_ic_launcher.png.flat",
-        "source": "/Users/haaem/.gradle/daemon/8.3/com.example.my_caly_flutter.app-main-23:/mipmap-xxxhdpi/ic_launcher.png"
+        "merged": "com.example.my_caly_flutter.app-merged_res-29:/drawable-v21_launch_background.xml.flat",
+        "source": "com.example.my_caly_flutter.app-main-24:/drawable-v21/launch_background.xml"
     },
     {
-        "merged": "com.example.my_caly_flutter.app-merged_res-28:/mipmap-mdpi_ic_launcher.png.flat",
-        "source": "com.example.my_caly_flutter.app-main-23:/mipmap-mdpi/ic_launcher.png"
-    },
-    {
-        "merged": "/Users/haaem/.gradle/daemon/8.3/com.example.my_caly_flutter.app-merged_res-28:/mipmap-xhdpi_ic_launcher.png.flat",
-        "source": "/Users/haaem/.gradle/daemon/8.3/com.example.my_caly_flutter.app-main-23:/mipmap-xhdpi/ic_launcher.png"
-    },
-    {
-        "merged": "com.example.my_caly_flutter.app-merged_res-28:/mipmap-xhdpi_ic_launcher.png.flat",
-        "source": "com.example.my_caly_flutter.app-main-23:/mipmap-xhdpi/ic_launcher.png"
-    },
-    {
-        "merged": "com.example.my_caly_flutter.app-merged_res-28:/mipmap-xxxhdpi_ic_launcher.png.flat",
-        "source": "com.example.my_caly_flutter.app-main-23:/mipmap-xxxhdpi/ic_launcher.png"
-    },
-    {
-        "merged": "/Users/haaem/.gradle/daemon/8.3/com.example.my_caly_flutter.app-merged_res-28:/mipmap-xxhdpi_ic_launcher.png.flat",
-        "source": "/Users/haaem/.gradle/daemon/8.3/com.example.my_caly_flutter.app-main-23:/mipmap-xxhdpi/ic_launcher.png"
-    },
-    {
-        "merged": "/Users/haaem/.gradle/daemon/8.3/com.example.my_caly_flutter.app-merged_res-28:/mipmap-hdpi_launcher.png.flat",
-        "source": "/Users/haaem/.gradle/daemon/8.3/com.example.my_caly_flutter.app-main-23:/mipmap-hdpi/launcher.png"
-    },
-    {
-        "merged": "/Users/haaem/.gradle/daemon/8.3/com.example.my_caly_flutter.app-merged_res-28:/mipmap-mdpi_ic_launcher.png.flat",
-        "source": "/Users/haaem/.gradle/daemon/8.3/com.example.my_caly_flutter.app-main-23:/mipmap-mdpi/ic_launcher.png"
-    },
-    {
-        "merged": "com.example.my_caly_flutter.app-merged_res-28:/mipmap-hdpi_ic_launcher.png.flat",
-        "source": "com.example.my_caly_flutter.app-main-23:/mipmap-hdpi/ic_launcher.png"
-    },
-    {
-        "merged": "com.example.my_caly_flutter.app-merged_res-28:/mipmap-xxhdpi_ic_launcher.png.flat",
-        "source": "com.example.my_caly_flutter.app-main-23:/mipmap-xxhdpi/ic_launcher.png"
-    },
-    {
-        "merged": "/Users/haaem/.gradle/daemon/8.3/com.example.my_caly_flutter.app-merged_res-28:/mipmap-xxxhdpi_launcher.png.flat",
-        "source": "/Users/haaem/.gradle/daemon/8.3/com.example.my_caly_flutter.app-main-23:/mipmap-xxxhdpi/launcher.png"
-    },
-    {
-        "merged": "/Users/haaem/.gradle/daemon/8.3/com.example.my_caly_flutter.app-merged_res-28:/mipmap-hdpi_ic_launcher.png.flat",
-        "source": "/Users/haaem/.gradle/daemon/8.3/com.example.my_caly_flutter.app-main-23:/mipmap-hdpi/ic_launcher.png"
+        "merged": "com.example.my_caly_flutter.app-merged_res-29:/mipmap-mdpi_ic_launcher.png.flat",
+        "source": "com.example.my_caly_flutter.app-main-24:/mipmap-mdpi/ic_launcher.png"
     }
 ]

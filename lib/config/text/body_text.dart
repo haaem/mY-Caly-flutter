@@ -8,6 +8,7 @@ class BodyText extends StatelessWidget {
   final FontWeight weight;
   final TextAlign textAlign;
   final bool shadow;
+  final bool underline;
   const BodyText({
     super.key,
     this.size = 16,
@@ -16,6 +17,7 @@ class BodyText extends StatelessWidget {
     this.weight = FontWeight.normal,
     this.textAlign = TextAlign.start,
     this.shadow = false,
+    this.underline = false
   });
 
   @override
@@ -28,6 +30,7 @@ class BodyText extends StatelessWidget {
         fontFamily: 'SFProRegular',
         fontSize: size,
         fontWeight: weight,
+        decoration: underline ? TextDecoration.underline : null,
         shadows: shadow ? <Shadow> [const Shadow(offset: Offset(2.5, 2.5), blurRadius: 10, color: primaryBlack)] : null
       ),
     );
