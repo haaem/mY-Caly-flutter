@@ -14,16 +14,8 @@ class CheckInterestPage extends StatefulWidget {
 
 class _CheckInterestPageState extends State<CheckInterestPage> {
   final List<String> interests = [
-    'Sports',
-    'Music',
-    'Art',
-    'Technology',
-    'Travel',
-    'Cooking',
-    'Gaming',
-    'Reading',
-    'Fitness',
-    'Movies'
+  '공공서비스', '전문직', '경영·기획·컨설팅', '금융·회계', '통상·무역', '교육', '인사·경영지원', '광고·마케팅', '영업', '법률·법무', 'IT', '디자인', '의약·보건',
+  '생산관리/품질관리', '전기·전자·반도체', '재료·신소재', '에너지·환경', '기계·로봇·자동화', '화학·화공·섬유', '바이오·식품', '토목·건설·환경'
   ];
   List<String> selectedInterests = [];
 
@@ -57,8 +49,9 @@ class _CheckInterestPageState extends State<CheckInterestPage> {
       String? major;
       String? grade;
       SharedPreferences.getInstance().then((prefs) {
+        prefs.setStringList('selectedTags', selectedInterests);
         major = prefs.getString('selectedMajor');
-        grade = prefs.getString('selectedGrade');
+        // grade = prefs.getString('selectedGrade');
       });
       Get.toNamed('/calendar');
     }
@@ -84,23 +77,6 @@ class _CheckInterestPageState extends State<CheckInterestPage> {
                         ),
                         borderRadius: BorderRadius.circular(5),
                       ),
-                      // ClipRRect(
-                      //   borderRadius: BorderRadius.circular(5),
-                      //   child: Row(
-                      //     children: [
-                      //       Container(
-                      //         height: 7,
-                      //         width: (width - 60) / 2,
-                      //         decoration: BoxDecoration(color: primaryGrey),
-                      //       ),
-                      //       Container(
-                      //         height: 7,
-                      //         width: (width - 60) / 2,
-                      //         decoration: BoxDecoration(color: primaryBlue),
-                      //       ),
-                      //     ],
-                      //   ),
-                      // ),
                       const SizedBox(height: 40),
                       const TitleText(
                         text: 'Personalize your Interests',

@@ -25,7 +25,7 @@ class _CheckMajorPageState extends State<CheckMajorPage> {
     SharedPreferences.getInstance().then((prefs) {
       prefs.setString('selectedMajor', major);
       // prefs.setString('selectedGrade', grade);
-      print("Saved Major: $major");
+      // print("Saved Major: $major");
     });
   }
 
