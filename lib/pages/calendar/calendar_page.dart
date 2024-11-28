@@ -3,6 +3,7 @@ import 'package:my_caly_flutter/config/color.dart';
 import 'package:my_caly_flutter/config/text/body_text.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:my_caly_flutter/pages/calendar/event.dart';
+import 'package:my_caly_flutter/data/event_data.dart';
 import 'package:get/get.dart';
 
 class CalendarPage extends StatefulWidget {
@@ -16,13 +17,26 @@ class _CalendarPageState extends State<CalendarPage> {
   DateTime? _selectedDay;
   DateTime _focusedDay = DateTime.now();
   DateTime? today;
+  Map<DateTime, List<Event>> _events = {};
+
+  void _loadEvents() async {
+    try {
+      var eventData = await EventData().fetchEventsFromServer();
+      setState(() {
+        _events = eventData;
+      });
+    } catch (e) {
+      debugPrint('Error fetching events: $e');
+    }
+  }
 
   List<Event> _getEventsForDay(DateTime day) {
-    return events[DateTime(day.year, day.month, day.day)] ?? [];
+    return _events[DateTime(day.year, day.month, day.day)] ?? [];
   }
 
   @override
   void initState() {
+    _loadEvents();
     super.initState();
     _selectedDay = _focusedDay;
     today = DateTime.now();

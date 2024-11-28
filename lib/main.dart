@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.indigo,
         canvasColor: Colors.white
       ),
-      initialRoute: '/calendar',
+      initialRoute: '/check_major',
       getPages: routes,
     );
   }
