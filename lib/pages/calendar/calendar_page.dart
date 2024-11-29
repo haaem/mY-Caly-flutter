@@ -270,7 +270,15 @@ class _CalendarPageState extends State<CalendarPage> {
                               ),
                               Flexible(
                                 child: ListTile(
-                                  title: BodyText(text: event.title, size: 18, weight: FontWeight.normal,),
+                                  title: Text(
+                                    event.title,
+                                    style: const TextStyle(
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.normal,
+                                    ),
+                                    maxLines: 1,
+                                    overflow: TextOverflow.ellipsis,
+                                  ),
                                 ),
                               ),
                             ],
