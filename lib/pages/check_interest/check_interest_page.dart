@@ -131,7 +131,7 @@ class _CheckInterestPageState extends State<CheckInterestPage> {
                           },
                         ),
                       ),
-                      SizedBox(height: 25,),
+                      const SizedBox(height: 25,),
                       GestureDetector(
                         onTap: _send,
                         child: Container(
