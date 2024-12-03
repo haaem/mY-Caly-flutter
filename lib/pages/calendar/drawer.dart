@@ -43,10 +43,28 @@ class _ProfileDrawerState extends State<ProfileDrawer> {
     return tags;
   }
 
+  static Future<void> _logout() async {
+    try {
+      await storage.deleteAll();
+
+      final prefs = await SharedPreferences.getInstance();
+      await prefs.clear();
+
+      Get.offAllNamed('/login');
+    } catch (e) {
+      debugPrint('Logout Error: $e');
+      Get.snackbar(
+        'Error',
+        '로그아웃 중 문제가 발생했습니다.',
+        snackPosition: SnackPosition.BOTTOM,
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
-    var media = MediaQuery.of(context).size;
-    var width = media.width;
+    // var media = MediaQuery.of(context).size;
+    // var width = media.width;
 
     return Drawer(
       child: SafeArea(
@@ -95,6 +113,19 @@ class _ProfileDrawerState extends State<ProfileDrawer> {
                     color: primaryBlue,
                     child: Center(
                       child: BodyText(text: 'change', color: Colors.white,),
+                    ),
+                  ),
+                ),
+                GestureDetector(
+                  onTap: () {
+                    _logout();
+                  },
+                  child: Container(
+                    height: 30,
+                    width: 60,
+                    color: primaryBlue,
+                    child: Center(
+                      child: BodyText(text: 'logout', color: Colors.white,),
                     ),
                   ),
                 )

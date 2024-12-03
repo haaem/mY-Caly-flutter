@@ -7,7 +7,7 @@ import 'package:my_caly_flutter/pages/calendar/calendar_page.dart';
 import 'package:my_caly_flutter/pages/login/signup_page.dart';
 
 final List<GetPage> routes = [
-  GetPage(name: '/login', page: () => LoginPage(), transition: Transition.zoom),
+  GetPage(name: '/login', page: () => LoginPage(), transition: Transition.fade),
   GetPage(name: '/calendar', page: () => const CalendarPage(), transition: Transition.fade),
   GetPage(name: '/check_major', page: () => const CheckMajorPage(), transition: Transition.fade),
   GetPage(name: '/check_interest', page: () => const CheckInterestPage(), transition: Transition.fade),

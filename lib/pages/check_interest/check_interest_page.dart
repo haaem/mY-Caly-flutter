@@ -62,10 +62,8 @@ class _CheckInterestPageState extends State<CheckInterestPage> {
         // grade = prefs.getString('selectedGrade');
       });
       userInfo = await storage.read(key: 'login');
-      // print("안녕하세요${userInfo}");
       var decoded = jsonDecode(userInfo);
       String id = decoded['id'];
-      print(selectedInterests);
       try {
         final response = await dio.request(
           'http://3.36.111.1/api/users/$id/details',
@@ -75,13 +73,13 @@ class _CheckInterestPageState extends State<CheckInterestPage> {
           queryParameters: {
             'username': id,
             'college': major,
-            'interested_tags': selectedInterests
           },
+          data: jsonEncode(selectedInterests)
         );
         if (response.statusCode == 200) {
           Get.offAllNamed('/calendar');
         }
-      } on DioError catch (e) {
+      } on DioException catch (e) {
         debugPrint(
             'Dio Error: ${e.response?.statusCode} - ${e.response?.data}');
         Get.snackbar(
@@ -110,7 +108,7 @@ class _CheckInterestPageState extends State<CheckInterestPage> {
       backgroundColor: Colors.white,
         body: SafeArea(
             child: Padding(
-                padding: EdgeInsets.fromLTRB(30, 40, 30, 20),
+                padding: const EdgeInsets.fromLTRB(30, 40, 30, 20),
                 child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [

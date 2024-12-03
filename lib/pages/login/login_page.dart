@@ -7,6 +7,7 @@ import 'package:my_caly_flutter/config/text/title_text.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'login.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -35,10 +36,9 @@ class _LoginPageState extends State<LoginPage> {
 
   _asyncMethod() async {
     userInfo = await storage.read(key:'login');
-
     // user의 정보가 있다면 calendar 페이지로
     if (userInfo != null) {
-      Navigator.pushNamed(context, '/calendar');
+      Get.offAllNamed('/calendar');
     }
   }
 
@@ -67,13 +67,43 @@ class _LoginPageState extends State<LoginPage> {
       );
 
       if (response.statusCode == 200) {
-        debugPrint('Response Data: ${response.data}');
+        //debugPrint('Response Data: ${response.data}');
 
         if (response.data is Map && response.data.containsKey('access_token')) {
           String token = response.data['access_token'];
           var val = jsonEncode(Login(id, password, token));
           await storage.write(key: 'login', value: val);
-          await Get.toNamed('/check_major');
+
+          final responseDetails = await dio.get(
+            'http://3.36.111.1/api/users/$id/details',
+            options: Options(
+              headers: {'Content-Type': 'application/json'},
+            ),
+            queryParameters: {'username': id},
+          );
+
+          if (responseDetails.statusCode == 200) {
+            final data = responseDetails.data;
+            final String? college = data['college'];
+            final List<String> tags = List<String>.from(data['interested_tags']);
+
+            if (college == null) {
+              Get.toNamed('/check_major');
+            } else {
+              final prefs = await SharedPreferences.getInstance();
+              await prefs.setString('selectedMajor', college);
+              await prefs.setStringList('selectedTags', tags);
+              print("tags들은 이거야"+tags.toString());
+              Get.offAllNamed('/calendar');
+            }
+          } else {
+
+            Get.snackbar(
+              'Error',
+              '서버에서 데이터를 가져오는 데 실패했습니다.',
+              snackPosition: SnackPosition.BOTTOM,
+            );
+          }
         } else {
           debugPrint('Invalid response format: ${response.data}');
           throw Exception('Invalid response format');
@@ -86,7 +116,7 @@ class _LoginPageState extends State<LoginPage> {
         );
         throw Exception('Failed to login');
       }
-    } on DioError catch (e) {
+    } on DioException catch (e) {
       debugPrint('Dio Error: ${e.response?.statusCode} - ${e.response?.data}');
       Get.snackbar(
         'Error',
