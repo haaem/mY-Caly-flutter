@@ -103,7 +103,7 @@ class DetailPage extends StatelessWidget {
                 children: tags.map((tag) => TagBox(tag: tag)).toList(),
               ),
               Padding(
-                padding: const EdgeInsets.fromLTRB(45, 55, 45, 55),
+                padding: const EdgeInsets.fromLTRB(45, 55, 45, 45),
                 child: event.content.isNotEmpty
                     ? BodyText(
                   text: event.content,
@@ -122,7 +122,7 @@ class DetailPage extends StatelessWidget {
                 child: Column(
                   children: (event.imageURL as List<String>).map((image) => Image.network(image)).toList(),
                 ),
-              ) : const SizedBox(height: 45,),
+              ) : const SizedBox(height: 0,),
               GestureDetector(
                 onTap: () async {
                   final url = Uri.parse(event.link);

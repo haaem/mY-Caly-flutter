@@ -63,6 +63,7 @@ class _CheckInterestPageState extends State<CheckInterestPage> {
     var width = media.width;
 
     return Scaffold(
+      backgroundColor: Colors.white,
         body: SafeArea(
             child: Padding(
                 padding: EdgeInsets.fromLTRB(30, 40, 30, 20),
@@ -70,12 +71,12 @@ class _CheckInterestPageState extends State<CheckInterestPage> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       ClipRRect(
+                        borderRadius: BorderRadius.circular(5),
                         child: Container(
                           width: (width-60),
                           height: 7,
-                          color: primaryBlack,
+                          color: primaryBlue,
                         ),
-                        borderRadius: BorderRadius.circular(5),
                       ),
                       const SizedBox(height: 40),
                       const TitleText(
@@ -140,7 +141,7 @@ class _CheckInterestPageState extends State<CheckInterestPage> {
                           width: width - 40,
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(10),
-                            color: primaryBlack,
+                            color: primaryBlue,
                           ),
                           child: const BodyText(
                             text: 'Done',
