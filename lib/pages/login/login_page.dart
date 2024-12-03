@@ -72,9 +72,8 @@ class _LoginPageState extends State<LoginPage> {
         if (response.data is Map && response.data.containsKey('access_token')) {
           String token = response.data['access_token'];
           var val = jsonEncode(Login(id, password, token));
-
           await storage.write(key: 'login', value: val);
-          Get.toNamed('/check_major');
+          await Get.toNamed('/check_major');
         } else {
           debugPrint('Invalid response format: ${response.data}');
           throw Exception('Invalid response format');
