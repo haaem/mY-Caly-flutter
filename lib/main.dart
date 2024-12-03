@@ -1,11 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:get/get.dart';
 import 'package:my_caly_flutter/config/routes.dart';
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
-void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
+Future main() async {
+  WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
+  FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
+  // WidgetsFlutterBinding.ensureInitialized();
+  _initialization();
   runApp(const MyApp());
+}
+
+Future _initialization() async {
+  await Future.delayed(const Duration(seconds: 2));
+  FlutterNativeSplash.remove();
 }
 
 class MyApp extends StatelessWidget {
