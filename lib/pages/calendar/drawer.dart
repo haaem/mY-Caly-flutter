@@ -92,7 +92,7 @@ class _ProfileDrawerState extends State<ProfileDrawer> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const BodyText(text: '연세대학교', size: 20, color: primaryBlack,),
+                          const BodyText(text: '연세대학교', size: 20, color: primaryBlack, weight: FontWeight.w500,),
                           const SizedBox(height: 8,),
                           _makeString(_getMajor(), primaryBlack, 20),
                           const SizedBox(height: 25,),

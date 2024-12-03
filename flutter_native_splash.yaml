@@ -1,0 +1,9 @@
+flutter_native_splash:
+  color: "#FFFFFF"
+  image: assets/image/mycaly.png
+  fullscreen: true
+  android_12:
+    color: "#FFFFFF"
+    image: assets/image/mycaly.png
+    icon_background_color: "#FFFFFF"
+    fullscreen: true

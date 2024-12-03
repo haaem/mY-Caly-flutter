@@ -71,6 +71,7 @@ flutter:
   assets:
     - assets/
     - assets/image/triangle.png
+    - assets/image/mycaly.png
 
   fonts:
     - family: SFProThin
@@ -82,4 +83,3 @@ flutter:
     - family: SFProBold
       fonts:
         - asset: assets/fonts/SF-Pro-Text-Semibold.otf
-
