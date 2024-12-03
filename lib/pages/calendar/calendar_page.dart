@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:my_caly_flutter/config/color.dart';
 import 'package:my_caly_flutter/config/text/body_text.dart';
+import 'package:my_caly_flutter/pages/calendar/drawer.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:my_caly_flutter/pages/calendar/event.dart';
 import 'package:my_caly_flutter/data/event_data.dart';
@@ -103,6 +104,7 @@ class _CalendarPageState extends State<CalendarPage> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        drawer: const ProfileDrawer(),
         body: SingleChildScrollView(
           child: Column(
             children: [

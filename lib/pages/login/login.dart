@@ -11,8 +11,8 @@ class Login {
         token = json['token'];
 
   Map<String, dynamic> toJson() => {
-    'accountName': id,
+    'id': id,
     'password': password,
-    'user_id': token,
+    'token': token,
   };
 }

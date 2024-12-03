@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:get/get.dart';
@@ -61,10 +62,13 @@ class _CheckInterestPageState extends State<CheckInterestPage> {
         // grade = prefs.getString('selectedGrade');
       });
       userInfo = await storage.read(key: 'login');
-      String id = userInfo.id;
+      // print("안녕하세요${userInfo}");
+      var decoded = jsonDecode(userInfo);
+      String id = decoded['id'];
+      print(selectedInterests);
       try {
         final response = await dio.request(
-          'http://3.36.111.1/api/users/$id/details/',
+          'http://3.36.111.1/api/users/$id/details',
           options: Options(
             method: 'PUT',
           ),
@@ -75,7 +79,7 @@ class _CheckInterestPageState extends State<CheckInterestPage> {
           },
         );
         if (response.statusCode == 200) {
-          Get.toNamed('/calendar');
+          Get.offAllNamed('/calendar');
         }
       } on DioError catch (e) {
         debugPrint(
@@ -146,7 +150,7 @@ class _CheckInterestPageState extends State<CheckInterestPage> {
                                 padding: const EdgeInsets.all(15),
                                 decoration: BoxDecoration(
                                   color: isSelected
-                                      ? Color(0xffEAF2FF)
+                                      ? const Color(0xffEAF2FF)
                                       : primaryTransparent,
                                   borderRadius: BorderRadius.circular(10),
                                   border: Border.all(
