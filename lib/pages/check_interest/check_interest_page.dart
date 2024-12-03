@@ -4,6 +4,8 @@ import 'package:get/get.dart';
 import '../../config/color.dart';
 import '../../config/text/body_text.dart';
 import '../../config/text/title_text.dart';
+import 'package:dio/dio.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 class CheckInterestPage extends StatefulWidget {
   const CheckInterestPage({super.key});
@@ -18,6 +20,9 @@ class _CheckInterestPageState extends State<CheckInterestPage> {
   '생산관리/품질관리', '전기·전자·반도체', '재료·신소재', '에너지·환경', '기계·로봇·자동화', '화학·화공·섬유', '바이오·식품', '토목·건설·환경'
   ];
   List<String> selectedInterests = [];
+  final dio = Dio();
+
+  static const storage = FlutterSecureStorage();
 
   void _toggleInterest(String interest) {
     setState(() {
@@ -37,7 +42,9 @@ class _CheckInterestPageState extends State<CheckInterestPage> {
     });
   }
 
-  void _send() {
+  void _send() async {
+    dynamic userInfo = '';
+
     if (selectedInterests.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
@@ -47,13 +54,46 @@ class _CheckInterestPageState extends State<CheckInterestPage> {
     } else {
       // 서버로 보내기
       String? major;
-      String? grade;
+      // String? grade;
       SharedPreferences.getInstance().then((prefs) {
         prefs.setStringList('selectedTags', selectedInterests);
         major = prefs.getString('selectedMajor');
         // grade = prefs.getString('selectedGrade');
       });
-      Get.toNamed('/calendar');
+      userInfo = await storage.read(key: 'login');
+      String id = userInfo.id;
+      try {
+        final response = await dio.request(
+          'http://3.36.111.1/api/users/$id/details/',
+          options: Options(
+            method: 'PUT',
+          ),
+          queryParameters: {
+            'username': id,
+            'college': major,
+            'interested_tags': selectedInterests
+          },
+        );
+        if (response.statusCode == 200) {
+          Get.toNamed('/calendar');
+        }
+      } on DioError catch (e) {
+        debugPrint(
+            'Dio Error: ${e.response?.statusCode} - ${e.response?.data}');
+        Get.snackbar(
+          'Error',
+          '서버와 통신 중 문제가 발생했습니다.',
+          snackPosition: SnackPosition.BOTTOM,
+        );
+      }
+      catch (e) {
+        debugPrint('Unhandled Error: $e');
+        Get.snackbar(
+          'Error',
+          '알 수 없는 오류가 발생했습니다.',
+          snackPosition: SnackPosition.BOTTOM,
+        );
+      }
     }
   }
 

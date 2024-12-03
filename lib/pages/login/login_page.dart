@@ -11,8 +11,6 @@ import 'login.dart';
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
 
-  static const storage = FlutterSecureStorage();
-
   @override
   State<LoginPage> createState() => _LoginPageState();
 }
