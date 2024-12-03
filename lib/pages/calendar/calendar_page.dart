@@ -336,11 +336,11 @@ class _CalendarPageState extends State<CalendarPage> {
                 itemBuilder: (context, index) {
                   final event = dayEvents[index];
                   return Container(
-                    margin: const EdgeInsets.symmetric(vertical: 0.7),
-                    padding: const EdgeInsets.symmetric(horizontal: 2.5),
+                    margin: const EdgeInsets.symmetric(vertical: 0.5),
+                    padding: const EdgeInsets.symmetric(horizontal: 2),
                     decoration: BoxDecoration(
                       color: _getCategoryColor(event.category),
-                      borderRadius: BorderRadius.circular(3),
+                      borderRadius: BorderRadius.circular(2),
                     ),
                     child: Text(
                       event.title,

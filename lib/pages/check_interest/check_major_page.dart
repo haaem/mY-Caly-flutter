@@ -13,10 +13,9 @@ class CheckMajorPage extends StatefulWidget {
 }
 
 class _CheckMajorPageState extends State<CheckMajorPage> {
-  final List<String> majors = ['기계공학전공', '전기전자공학전공', '신소재공학전공', '건설환경공학전공',
-    '도시공학전공','건축공학전공','건축학(설계)','화학생명공학전공','산업공학전공','시스템반도체공학과',
-    '디스플레이융합공학과', '컴퓨터과학과', '인공지능학과', 'IT융합공학과'];
-  final List<String> grades = ['1학년', '2학년', '3학년', '4학년'];
+  final List<String> majors = ['기계공학부', '전기전자공학부', '신소재공학부', '건축공학과',
+    '도시공학과','화학생명공학부','산업공학과', '디스플레이융합공학과', '컴퓨터과학과', '인공지능학과', '첨단융합공학부'];
+  // final List<String> grades = ['1학년', '2학년', '3학년', '4학년'];
 
   String? selectedMajor;
   String? selectedGrade;
@@ -33,13 +32,13 @@ class _CheckMajorPageState extends State<CheckMajorPage> {
   Widget build(BuildContext context) {
     var media = MediaQuery.of(context).size;
     var width = media.width;
-    var height = media.height;
 
     return Scaffold(
+      backgroundColor: Colors.white,
       body: SafeArea(
           child: SingleChildScrollView(
             child: Padding(
-              padding: EdgeInsets.fromLTRB(30, 40, 30, 20),
+              padding: const EdgeInsets.fromLTRB(30, 40, 30, 20),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -50,12 +49,12 @@ class _CheckMajorPageState extends State<CheckMajorPage> {
                         Container(
                           height: 7,
                           width: (width-60)/2,
-                          decoration: BoxDecoration(color: primaryBlue),
+                          decoration: const BoxDecoration(color: primaryBlue),
                         ),
                         Container(
                           height: 7,
                           width: (width-60)/2,
-                          decoration: BoxDecoration(color: primaryGrey),
+                          decoration: const BoxDecoration(color: primaryGrey),
                         ),
                       ],
                     ),
@@ -106,11 +105,11 @@ class _CheckMajorPageState extends State<CheckMajorPage> {
                   const SizedBox(height: 30,),
                   GestureDetector(
                     child: Container(
-                      child: BodyText(text: 'Next', color: Colors.white,),
                       alignment: Alignment.center,
                       height: 50,
                       width: width-40,
-                      decoration: BoxDecoration(border: Border.all(), color: primaryBlack, borderRadius: BorderRadius.circular(10)),
+                      decoration: BoxDecoration(border: Border.all(), color: primaryBlue, borderRadius: BorderRadius.circular(10)),
+                      child: const BodyText(text: 'Next', color: Colors.white,),
                     ),
                     onTap: () {
                       // if (selectedMajor != null && selectedGrade != null) {
@@ -120,7 +119,7 @@ class _CheckMajorPageState extends State<CheckMajorPage> {
                       } else {
                         // 전공이나 학년이 선택되지 않은 경우
                         ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(content: Text('Please select both your major and grade.')),
+                          const SnackBar(content: Text('Please select your major')),
                         );
                       }
                     },
