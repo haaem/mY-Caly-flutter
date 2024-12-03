@@ -1,0 +1,27 @@
+# Flutter-specific
+.dart_tool/
+build/
+.idea/
+*.iml
+*.lock
+pubspec.lock
+*.log
+
+# macOS-specific
+.DS_Store
+
+# Android-specific
+.gradle/
+local.properties
+
+# iOS-specific
+Pods/
+DerivedData/
+
+# Flutter build files
+.flutter-plugins
+.flutter-plugins-dependencies
+
+# IntelliJ and VSCode settings
+.vscode/
+.idea/
