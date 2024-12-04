@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:my_caly_flutter/config/color.dart';
 import 'package:my_caly_flutter/config/text/body_text.dart';
-import 'package:my_caly_flutter/main.dart';
 import 'package:my_caly_flutter/pages/calendar/drawer.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:table_calendar/table_calendar.dart';
@@ -41,12 +40,13 @@ class _CalendarPageState extends State<CalendarPage> {
   _notiTest() async {
     final Dio dio = Dio();
     String? token;
-    SharedPreferences.getInstance().then((prefs) {
-      token = prefs.getString('token');
+    await SharedPreferences.getInstance().then((prefs) {
+      token = prefs.getString('notificationToken');
     });
+    print("안녕여기+"+token.toString());
     final response = await dio.post(
         'http://3.36.111.1/api/notification/test/send_notification/',
-      queryParameters: {'token': token, 'title': 'tester', 'body': 'body'}
+        queryParameters: {'token': token, 'title': 'tester', 'body': 'body'}
     );
   }
 
@@ -56,7 +56,7 @@ class _CalendarPageState extends State<CalendarPage> {
     super.initState();
     _selectedDay = _focusedDay;
     today = DateTime.now();
-    //_notiTest();
+    // _notiTest();
   }
 
   @override

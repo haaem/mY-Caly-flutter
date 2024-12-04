@@ -89,17 +89,18 @@ Future<void> _setupFCMListeners() async {
 
   // Get FCM token
   String? token = await messaging.getToken();
-  // print("FCM Token: $token");
+  print("FCM Token: $token");
 
   if (token != null) {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    // prefs.setString('notificationToken', token);
+    await SharedPreferences.getInstance().then((prefs) {
+      prefs.setString('notificationToken', token);
+    });
   }
 
   // foreground
   FirebaseMessaging.onMessage.listen((RemoteMessage? message) {
     if (message != null) {
-      //_showNotification(message);
+      _showNotification(message);
     }
   });
 
