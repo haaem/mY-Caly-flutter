@@ -1,16 +1,36 @@
-# my_caly_flutter
+# GDG Yonsei oTP Project - $${\textsf{\color{blue}mY-CalY}}$$
+Hello, we are mY-CalY !
 
-A new Flutter project.
 
-## Getting Started
+## 📅 mY-CalY is service for
+***
+As a student at Yonsei University, we noticed the difficulty in accessing scattered information about scholarships, academic schedules, and employment-related topics. It was also challenging to extract specific details related to my department and interests. To address this, we created an app that consolidates information from the Career Yonsei platform and department websites, classifies it according to relevant keywords and department affiliations, and integrates both internal and external schedules and information.
 
-This project is a starting point for a Flutter application.
+## 📱 Execution Method
+***
+For Android User
 
-A few resources to get you started if this is your first Flutter project:
+1. Download the apk file for your mobile version [HERE]()
+2. Run the apk file on your phone.
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+## 📺 Demo
+***
+|Splash Screen|Login|Personalize|
+|---|---|---|
+|<img src="https://github.com/user-attachments/assets/0058c630-d6db-4648-848b-f779fcec074b" width="300">|<img src="https://github.com/user-attachments/assets/c57d3bcd-b4ce-4877-83c0-ccd14c7ee8ed" width="300">|<img src="https://github.com/user-attachments/assets/c57d3bcd-b4ce-4877-83c0-ccd14c7ee8ed" width="300">|<img src="https://github.com/user-attachments/assets/4cbe4c8c-cbd2-4d1a-869a-c7b4bccd519b" alt="Demo GIF" />|
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+|Calendar|Event|Drawer|
+|---|---|---|
+|<img src="https://github.com/user-attachments/assets/cce6f284-3f51-478c-ac6e-aae97d6b2914" width="300">|<img src="https://github.com/user-attachments/assets/dd077270-4929-4666-90cc-5ebd96250104" width="300">|<img src="https://github.com/user-attachments/assets/9fc7b422-ade9-4665-8266-5a63bbf37925" width="300">|
+
+## 🧬 Tech Dependences
+***
+1. Network : Dio
+2. Route Management: GetX
+3. Firebase
+
+## 👥 About Us
+***
+|개발|김승유(ML), 김현호(Backend), 이혜민(Mobile), 최서연(DevRel)|
+|---|---|
+|제작 기간|11.11 - 12.4 (4주)|
