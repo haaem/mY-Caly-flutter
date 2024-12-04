@@ -111,9 +111,11 @@ class _LoginPageState extends State<LoginPage> {
           if (responseDetails.statusCode == 200) {
             final data = responseDetails.data;
             final String? college = data['college'];
-            final List<String> tags = List<String>.from(data['interested_tags']);
+            final List<String> tags = data['interested_tags'] != null
+                ? List<String>.from(data['interested_tags'])
+                : [];
 
-            if (college == null) {
+            if (college == null || tags.isEmpty) {
               Get.toNamed('/check_major');
             } else {
               final prefs = await SharedPreferences.getInstance();
