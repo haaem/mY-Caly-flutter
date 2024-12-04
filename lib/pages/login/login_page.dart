@@ -50,7 +50,7 @@ class _LoginPageState extends State<LoginPage> {
     if (token != null) {
       try {
         final response = await dio.put(
-            'http://3.36.111.1//api/notification/register_token',
+            'http://3.36.111.1/api/notification/register_token',
             queryParameters: {
               'username': id,
               'fcm_token': token

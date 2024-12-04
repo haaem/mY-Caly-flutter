@@ -25,7 +25,7 @@ class SignupPage extends StatelessWidget {
       );
       return;
     }
-    //debugPrint('ID: $id, Password: $password');
+    // debugPrint('ID: $id, Password: $password');
     final response = await dio.request(
       'http://3.36.111.1/api/users/signup',
       options: Options(
