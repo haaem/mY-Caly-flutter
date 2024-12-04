@@ -120,6 +120,7 @@ class _CalendarPageState extends State<CalendarPage> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        backgroundColor: Colors.white,
         drawer: const ProfileDrawer(),
         body: SingleChildScrollView(
           child: Column(
