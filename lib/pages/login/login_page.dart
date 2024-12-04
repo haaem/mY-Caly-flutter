@@ -41,6 +41,30 @@ class _LoginPageState extends State<LoginPage> {
       Get.offAllNamed('/calendar');
     }
   }
+  
+  _sendNotiToken(String id) async {
+    String? token;
+    SharedPreferences.getInstance().then((prefs) {
+      token = prefs.getString('notificationToken');
+    });
+    if (token != null) {
+      try {
+        final response = await dio.put(
+            'http://3.36.111.1//api/notification/register_token',
+            queryParameters: {
+              'username': id,
+              'fcm_token': token
+            }
+        );
+        if (response.statusCode != 200) {
+          debugPrint('Invalid response format: ${response.data}');
+          throw Exception('Invalid response format');
+        }
+      } catch (e) {
+        print("Failed to send token: $e");
+      }
+    }
+  }
 
   // 로그인 버튼 눌렀을 때
   void _login() async {
@@ -73,6 +97,8 @@ class _LoginPageState extends State<LoginPage> {
           String token = response.data['access_token'];
           var val = jsonEncode(Login(id, password, token));
           await storage.write(key: 'login', value: val);
+
+          await _sendNotiToken(id);
 
           final responseDetails = await dio.get(
             'http://3.36.111.1/api/users/$id/details',

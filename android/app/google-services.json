@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "239748263720",
+    "project_id": "my-caly-yonsei",
+    "storage_bucket": "my-caly-yonsei.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:239748263720:android:fc04e843d00fb954bf6a1d",
+        "android_client_info": {
+          "package_name": "com.yonseigdg.my_caly"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA3_qlNze0X2hxaxNEPMdHZAlyiTBiEZRQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
