@@ -17,7 +17,7 @@ For Android User
 
 |Splash Screen|Login|Personalize|
 |---|---|---|
-|<img src="https://github.com/user-attachments/assets/0058c630-d6db-4648-848b-f779fcec074b" width="300">|<img src="https://github.com/user-attachments/assets/c57d3bcd-b4ce-4877-83c0-ccd14c7ee8ed" width="300">|<img src="https://github.com/user-attachments/assets/c57d3bcd-b4ce-4877-83c0-ccd14c7ee8ed" width="300">|<img src="https://github.com/user-attachments/assets/4cbe4c8c-cbd2-4d1a-869a-c7b4bccd519b" alt="Demo GIF" />|
+|<img src="https://github.com/user-attachments/assets/0058c630-d6db-4648-848b-f779fcec074b" width="300">|<img src="https://github.com/user-attachments/assets/c57d3bcd-b4ce-4877-83c0-ccd14c7ee8ed" width="300">|<img src="https://github.com/user-attachments/assets/c57d3bcd-b4ce-4877-83c0-ccd14c7ee8ed" width="300">|<img src="https://github.com/user-attachments/assets/67a3d790-c8e3-4682-a34b-92073ba863e9" width="300">|
 
 |Calendar|Event|Drawer|
 |---|---|---|
