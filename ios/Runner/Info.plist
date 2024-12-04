@@ -54,5 +54,12 @@
 		<true/>
 		<key>UIViewControllerBasedStatusBarAppearance</key>
 		<false/>
+		<key>UIUserNotificationUsageDescription</key>
+		<string>앱에서 푸시 알림을 받으려면 권한이 필요합니다.</string>
+		<key>UIBackgroundModes</key>
+		<array>
+			<string>fetch</string>
+			<string>remote-notification</string>
+		</array>
 	</dict>
 </plist>
