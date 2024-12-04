@@ -53,42 +53,67 @@ class SignupPage extends StatelessWidget {
       child: Scaffold(
         backgroundColor: Colors.white,
         body: SingleChildScrollView(
-          child: Padding(
-            padding: EdgeInsets.fromLTRB(20, height*0.25, 20, 20),
+          child: SizedBox(
+            height: height,
+            width: width,
             child: Column(
-              // mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                const TitleText(text: 'mY-Caly', weight: FontWeight.w900, textAlign: TextAlign.center, size: 30, color: primaryBlue,),
-                const SizedBox(height: 60,),
-                const TitleText(text: 'Sign Up', weight: FontWeight.w800, textAlign: TextAlign.center, size: 20, color: primaryBlue,),
-                const SizedBox(height: 10,),
-                // ID
-                TextField(
-                  controller: _idController,
-                  decoration: const InputDecoration(
-                    labelText: 'ID',
-                    labelStyle: TextStyle(color: Colors.black26),
-                    border: OutlineInputBorder(),
+                // const TitleText(text: 'mY-Caly', weight: FontWeight.w900, textAlign: TextAlign.center, size: 30, color: primaryBlue,),
+                // SizedBox(height: height*0.1,),
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(15),
+                  child: Container(
+                    color: const Color(0xffD8E6F6),
+                    height: 155,
+                    width: width-66,
+                    child: Column(
+                      children: [
+                        const SizedBox(height: 18,),
+                        const TitleText(text: 'SIGNUP', weight: FontWeight.w800, textAlign: TextAlign.center, size: 15, color: primaryBlack,),
+                        const SizedBox(height: 10,),
+                        // ID
+                        SizedBox(
+                          height: 35,
+                          width: width-100,
+                          child: TextField(
+                            controller: _idController,
+                            maxLines: 1,
+                            decoration: InputDecoration(
+                              labelText: 'ID',
+                              labelStyle: const TextStyle(color: Colors.black26, fontSize: 15),
+                              border: OutlineInputBorder(borderRadius: BorderRadius.circular(4)),
+                            ),
+                          ),
+                        ),
+                        const SizedBox(height: 10),
+                        // Password
+                        SizedBox(
+                          height: 35,
+                          width: width-100,
+                          child: TextField(
+                            controller: _passwordController,
+                            maxLines: 1,
+                            decoration: InputDecoration(
+                              labelText: 'Password',
+                              labelStyle: const TextStyle(color: Colors.black26, fontSize: 15),
+                              border: OutlineInputBorder(borderRadius: BorderRadius.circular(4)),
+                            ),
+                            obscureText: true,
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
-                const SizedBox(height: 20), // 간격
-                // Password
-                TextField(
-                  controller: _passwordController,
-                  decoration: const InputDecoration(
-                    labelText: 'Password',
-                    labelStyle: TextStyle(color: Colors.black26),
-                    border: OutlineInputBorder(),
-                  ),
-                  obscureText: true,
-                ),
-                const SizedBox(height: 20), // 간격
+                const SizedBox(height: 30),
                 // 로그인 버튼
                 GestureDetector(
                   child: Container(
                     alignment: Alignment.center,
                     height: 50,
-                    width: width-40,
+                    width: width-66,
                     decoration: BoxDecoration(border: Border.all(), color: primaryBlue, borderRadius: BorderRadius.circular(10)),
                     child: const BodyText(text: 'Sign Up', color: Colors.white,),
                   ),
