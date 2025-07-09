@@ -9,6 +9,7 @@ pubspec.lock
 
 # macOS-specific
 .DS_Store
+**/.DS_Store
 
 # Android-specific
 .gradle/
